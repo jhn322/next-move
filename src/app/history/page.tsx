@@ -63,6 +63,7 @@ import {
   GameHistory,
 } from "@/lib/mongodb-service";
 import HistoryLoading from "./loading";
+import Link from "next/link";
 
 interface GameStats {
   totalGames: number;
@@ -73,7 +74,7 @@ interface GameStats {
   winRate: number;
   averageMovesPerGame: number;
   averageGameTime: number;
-  beatenBots: Array<{ name: string; difficulty: string }>;
+  beatenBots: Array<{ name: string; difficulty: string; id: number }>;
 }
 
 const HistoryPage = () => {
@@ -158,18 +159,32 @@ const HistoryPage = () => {
             const averageGameTime = totalGames > 0 ? totalTime / totalGames : 0;
 
             // Get list of beaten bots
-            const beatenBots: Array<{ name: string; difficulty: string }> = [];
+            const beatenBots: Array<{
+              name: string;
+              difficulty: string;
+              id: number;
+            }> = [];
             history.forEach((game: GameHistory) => {
               if (game.result === "win") {
                 const botName = game.opponent;
                 const difficulty = game.difficulty;
 
+                // Find the bot in BOTS_BY_DIFFICULTY to get its ID
+                const botInDifficulty = BOTS_BY_DIFFICULTY[
+                  difficulty as keyof typeof BOTS_BY_DIFFICULTY
+                ]?.find((bot: Bot) => bot.name === botName);
+
                 // Check if this bot is already in the list
                 const existingBot = beatenBots.find(
                   (bot) => bot.name === botName
                 );
+
                 if (!existingBot) {
-                  beatenBots.push({ name: botName, difficulty });
+                  beatenBots.push({
+                    name: botName,
+                    difficulty,
+                    id: botInDifficulty?.id || 0,
+                  });
                 }
               }
             });
@@ -740,38 +755,51 @@ const HistoryPage = () => {
                         {BOTS_BY_DIFFICULTY[
                           difficulty as keyof typeof BOTS_BY_DIFFICULTY
                         ].map((bot) => (
-                          <Card
+                          <Link
                             key={bot.name}
+                            href={`/play/${difficulty}/${bot.id}`}
                             className={cn(
-                              "border",
-                              isBotBeaten(bot.name) &&
-                                "border-green-500 bg-green-50 dark:bg-green-950/20"
+                              "block",
+                              isBotBeaten(bot.name)
+                                ? "cursor-pointer"
+                                : "cursor-pointer"
                             )}
                           >
-                            <CardContent className="p-4">
-                              <div className="flex items-center gap-3">
-                                <Avatar className="h-12 w-12">
-                                  <AvatarImage src={bot.image} alt={bot.name} />
-                                  <AvatarFallback>
-                                    {bot.name.charAt(0)}
-                                  </AvatarFallback>
-                                </Avatar>
-                                <div className="flex-1">
-                                  <div className="font-semibold">
-                                    {bot.name}
+                            <Card
+                              className={cn(
+                                "border transition-all hover:shadow-md",
+                                isBotBeaten(bot.name) &&
+                                  "border-green-500 bg-green-50 dark:bg-green-950/20"
+                              )}
+                            >
+                              <CardContent className="p-4">
+                                <div className="flex items-center gap-3">
+                                  <Avatar className="h-12 w-12">
+                                    <AvatarImage
+                                      src={bot.image}
+                                      alt={bot.name}
+                                    />
+                                    <AvatarFallback>
+                                      {bot.name.charAt(0)}
+                                    </AvatarFallback>
+                                  </Avatar>
+                                  <div className="flex-1">
+                                    <div className="font-semibold">
+                                      {bot.name}
+                                    </div>
+                                    <div className="text-xs text-muted-foreground">
+                                      {bot.description}
+                                    </div>
                                   </div>
-                                  <div className="text-xs text-muted-foreground">
-                                    {bot.description}
-                                  </div>
+                                  {isBotBeaten(bot.name) ? (
+                                    <CheckCircle2 className="h-6 w-6 text-green-500" />
+                                  ) : (
+                                    <div className="h-6 w-6 rounded-full border-2 border-dashed border-muted-foreground/50" />
+                                  )}
                                 </div>
-                                {isBotBeaten(bot.name) ? (
-                                  <CheckCircle2 className="h-6 w-6 text-green-500" />
-                                ) : (
-                                  <div className="h-6 w-6 rounded-full border-2 border-dashed border-muted-foreground/50" />
-                                )}
-                              </div>
-                            </CardContent>
-                          </Card>
+                              </CardContent>
+                            </Card>
+                          </Link>
                         ))}
                       </div>
                     </div>

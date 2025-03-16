@@ -1,4 +1,5 @@
 export interface Bot {
+  id: number;
   name: string;
   image: string;
   rating: number;
@@ -12,6 +13,7 @@ export interface Bot {
 export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
   beginner: [
     {
+      id: 1,
       name: "Ziggy",
       image: "/animals/sloth.png",
       rating: 1000,
@@ -22,6 +24,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/lv.png",
     },
     {
+      id: 2,
       name: "Milo",
       image: "/animals/hen.png",
       rating: 1030,
@@ -32,6 +35,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/ua.png",
     },
     {
+      id: 3,
       name: "Luna",
       image: "/animals/beaver.png",
       rating: 1060,
@@ -42,6 +46,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/rs.png",
     },
     {
+      id: 4,
       name: "Finn",
       image: "/animals/lemur.png",
       rating: 1090,
@@ -52,6 +57,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/ad.png",
     },
     {
+      id: 5,
       name: "Juno",
       image: "/animals/hippopotamus.png",
       rating: 1120,
@@ -62,6 +68,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/ps.png",
     },
     {
+      id: 6,
       name: "Nova",
       image: "/animals/dog.png",
       rating: 1150,
@@ -74,6 +81,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
   ],
   easy: [
     {
+      id: 7,
       name: "Blaze",
       image: "/animals/koala.png",
       rating: 1200,
@@ -84,6 +92,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/au.png",
     },
     {
+      id: 8,
       name: "Echo",
       image: "/animals/camel.png",
       rating: 1230,
@@ -94,6 +103,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/il.png",
     },
     {
+      id: 9,
       name: "Rex",
       image: "/animals/pig.png",
       rating: 1260,
@@ -104,6 +114,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/bg.png",
     },
     {
+      id: 10,
       name: "Skye",
       image: "/animals/horse.png",
       rating: 1290,
@@ -114,6 +125,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/ca.png",
     },
     {
+      id: 11,
       name: "Zephyr",
       image: "/animals/llama.png",
       rating: 1320,
@@ -124,6 +136,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/is.png",
     },
     {
+      id: 12,
       name: "Orion",
       image: "/animals/monkey.png",
       rating: 1350,
@@ -136,6 +149,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
   ],
   intermediate: [
     {
+      id: 13,
       name: "Axel",
       image: "/animals/giraffe.png",
       rating: 1400,
@@ -146,6 +160,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/ro.png",
     },
     {
+      id: 14,
       name: "Kai",
       image: "/animals/duck.png",
       rating: 1450,
@@ -156,6 +171,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/ug.png",
     },
     {
+      id: 15,
       name: "Zara",
       image: "/animals/penguin.png",
       rating: 1500,
@@ -166,6 +182,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/ba.png",
     },
     {
+      id: 16,
       name: "Jax",
       image: "/animals/panda.png",
       rating: 1550,
@@ -176,6 +193,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/dk.png",
     },
     {
+      id: 17,
       name: "Ivy",
       image: "/animals/rabbit.png",
       rating: 1600,
@@ -186,6 +204,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/uy.png",
     },
     {
+      id: 18,
       name: "Raven",
       image: "/animals/raccoon.png",
       rating: 1650,
@@ -198,6 +217,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
   ],
   advanced: [
     {
+      id: 19,
       name: "Phoenix",
       image: "/animals/walrus.png",
       rating: 1700,
@@ -208,6 +228,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/sct.png",
     },
     {
+      id: 20,
       name: "Sage",
       image: "/animals/swan.png",
       rating: 1750,
@@ -218,6 +239,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/ge.png",
     },
     {
+      id: 21,
       name: "Quinn",
       image: "/animals/sheep.png",
       rating: 1800,
@@ -228,6 +250,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/gr.png",
     },
     {
+      id: 22,
       name: "Vega",
       image: "/animals/frog.png",
       rating: 1850,
@@ -238,6 +261,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/ie.png",
     },
     {
+      id: 23,
       name: "Lyra",
       image: "/animals/owl.png",
       rating: 1900,
@@ -248,6 +272,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/de.png",
     },
     {
+      id: 24,
       name: "Atlas",
       image: "/animals/moose.png",
       rating: 1950,
@@ -260,6 +285,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
   ],
   hard: [
     {
+      id: 25,
       name: "Titan",
       image: "/animals/capybara.png",
       rating: 2000,
@@ -270,6 +296,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/cn.png",
     },
     {
+      id: 26,
       name: "Loki",
       image: "/animals/cat.png",
       rating: 2050,
@@ -280,6 +307,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/it.png",
     },
     {
+      id: 27,
       name: "Nyx",
       image: "/animals/crocodile.png",
       rating: 2100,
@@ -290,6 +318,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/jp.png",
     },
     {
+      id: 28,
       name: "Thor",
       image: "/animals/chameleon.png",
       rating: 2150,
@@ -300,6 +329,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/kr.png",
     },
     {
+      id: 29,
       name: "Freya",
       image: "/animals/alpaca.png",
       rating: 2200,
@@ -310,6 +340,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/pk.png",
     },
     {
+      id: 30,
       name: "Odin",
       image: "/animals/wild-boar.png",
       rating: 2250,
@@ -322,6 +353,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
   ],
   expert: [
     {
+      id: 31,
       name: "Apollo",
       image: "/animals/zebra.png",
       rating: 2300,
@@ -332,6 +364,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/ar.png",
     },
     {
+      id: 32,
       name: "Athena",
       image: "/animals/elephant.png",
       rating: 2350,
@@ -342,6 +375,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/nz.png",
     },
     {
+      id: 33,
       name: "Hermes",
       image: "/animals/polar-bear.png",
       rating: 2400,
@@ -352,6 +386,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/ph.png",
     },
     {
+      id: 34,
       name: "Artemis",
       image: "/animals/deer.png",
       rating: 2450,
@@ -362,6 +397,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/lt.png",
     },
     {
+      id: 35,
       name: "Hera",
       image: "/animals/eagle.png",
       rating: 2500,
@@ -372,6 +408,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/pt.png",
     },
     {
+      id: 36,
       name: "Zeus",
       image: "/animals/gorilla.png",
       rating: 2550,
@@ -384,6 +421,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
   ],
   master: [
     {
+      id: 37,
       name: "Poseidon",
       image: "/animals/kangaroo.png",
       rating: 2600,
@@ -394,6 +432,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/sy.png",
     },
     {
+      id: 38,
       name: "Hades",
       image: "/animals/wolf.png",
       rating: 2650,
@@ -404,6 +443,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/tr.png",
     },
     {
+      id: 39,
       name: "Demeter",
       image: "/animals/rhinoceros.png",
       rating: 2700,
@@ -414,6 +454,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/am.png",
     },
     {
+      id: 40,
       name: "Ares",
       image: "/animals/ostrich.png",
       rating: 2750,
@@ -424,6 +465,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/cz.png",
     },
     {
+      id: 41,
       name: "Hephaestus",
       image: "/animals/shark.png",
       rating: 2800,
@@ -434,6 +476,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/us.png",
     },
     {
+      id: 42,
       name: "Dionysus",
       image: "/animals/bear.png",
       rating: 2850,
@@ -446,6 +489,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
   ],
   grandmaster: [
     {
+      id: 43,
       name: "Chronos",
       image: "/animals/cheetah.png",
       rating: 2950,
@@ -456,6 +500,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/wls.png",
     },
     {
+      id: 44,
       name: "Gaia",
       image: "/animals/snake.png",
       rating: 3000,
@@ -466,6 +511,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/eng.png",
     },
     {
+      id: 45,
       name: "Uranus",
       image: "/animals/tiger.png",
       rating: 3050,
@@ -476,6 +522,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/fr.png",
     },
     {
+      id: 46,
       name: "Hyperion",
       image: "/animals/fox.png",
       rating: 3100,
@@ -486,6 +533,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/ru.png",
     },
     {
+      id: 47,
       name: "Rhea",
       image: "/animals/lion.png",
       rating: 3150,
@@ -496,6 +544,7 @@ export const BOTS_BY_DIFFICULTY: Record<string, Bot[]> = {
       flag: "/flags/se.png",
     },
     {
+      id: 48,
       name: "Helios",
       image: "/animals/goat.png",
       rating: 3200,

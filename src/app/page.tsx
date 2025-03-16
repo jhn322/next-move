@@ -623,7 +623,9 @@ export default function Home() {
 
                     {/* Next Bot Card */}
                     <Link
-                      href={`/play/${nextBot.difficulty.toLowerCase()}`}
+                      href={`/play/${nextBot.difficulty.toLowerCase()}/${
+                        nextBot.id
+                      }`}
                       className="block p-4 rounded-lg border border-border/50 hover:bg-accent/50 transition-colors"
                     >
                       <div className="flex items-center gap-3">

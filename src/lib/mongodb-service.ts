@@ -201,3 +201,34 @@ export async function clearUserGameHistory(userId: string): Promise<boolean> {
   const result = await collection.deleteMany({ user_id: userId });
   return result.acknowledged;
 }
+
+export async function deleteUserAccount(userId: string): Promise<boolean> {
+  const client = await getClient();
+
+  try {
+    // Delete user settings
+    const settingsCollection = client.db("chess").collection("user_settings");
+    await settingsCollection.deleteOne({ user_id: userId });
+
+    // Delete game history
+    const historyCollection = client.db("chess").collection("game_history");
+    await historyCollection.deleteMany({ user_id: userId });
+
+    // Delete from users collection if it exists
+    const usersCollection = client.db("chess").collection("users");
+    await usersCollection.deleteOne({ _id: new ObjectId(userId) });
+
+    // Delete from accounts collection if it exists
+    const accountsCollection = client.db("chess").collection("accounts");
+    await accountsCollection.deleteOne({ userId });
+
+    // Delete from sessions collection if it exists
+    const sessionsCollection = client.db("chess").collection("sessions");
+    await sessionsCollection.deleteMany({ userId });
+
+    return true;
+  } catch (error) {
+    console.error("Error deleting user account:", error);
+    return false;
+  }
+}

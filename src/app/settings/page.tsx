@@ -28,6 +28,7 @@ import {
   Flag,
   Sparkles,
   Pencil,
+  Trash2,
 } from "lucide-react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -60,13 +61,25 @@ import {
   getUserSettings,
   saveUserSettings,
   UserSettings,
+  deleteUserAccount,
 } from "@/lib/mongodb-service";
 import SettingsLoading from "./loading";
 import HoverText from "@/components/ui/hover-text";
 import { getCharacterNameFromPath } from "@/lib/utils";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function SettingsPage() {
-  const { status, session } = useAuth();
+  const { status, session, signOut } = useAuth();
   const [settings, setSettings] = useState<Omit<UserSettings, "user_id">>({
     display_name: "",
     first_name: "",
@@ -341,6 +354,45 @@ export default function SettingsPage() {
   const handleAvatarSelect = (avatarPath: string) => {
     setSettings({ ...settings, avatar_url: avatarPath });
     setAvatarDialogOpen(false);
+  };
+
+  const handleDeleteAccount = async () => {
+    if (!session?.user?.id) {
+      setError("You need to be signed in to delete your account");
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const success = await deleteUserAccount(session.user.id);
+
+      if (success) {
+        localStorage.clear();
+
+        // Sign out the user
+        await signOut();
+
+        router.push("/");
+      } else {
+        setError("Failed to delete account. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error deleting account:", error);
+      setError("An error occurred while deleting your account.");
+
+      if (
+        error instanceof Error &&
+        (error.message.includes("401") ||
+          error.message.includes("auth") ||
+          error.message.includes("permission"))
+      ) {
+        handleAuthError(error);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (status === "loading" || loading) {
@@ -907,6 +959,56 @@ export default function SettingsPage() {
                   </Button>
                 </div>
               </div>
+
+              <div className="pt-6 mt-6 border-t">
+                <h3 className="text-lg font-medium text-destructive mb-4">
+                  Danger Zone
+                </h3>
+                <div className="bg-destructive/5 border border-destructive/20 rounded-lg p-4">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h4 className="font-medium">Delete Account</h4>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Permanently delete your account and all associated data.
+                        This action cannot be undone.
+                      </p>
+                    </div>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          className="flex items-center gap-2"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                          Delete
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>
+                            Are you absolutely sure?
+                          </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This action cannot be undone. This will permanently
+                            delete your account and remove all of your data from
+                            our servers.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={handleDeleteAccount}
+                            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                          >
+                            Delete Account
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
+                </div>
+              </div>
             </TabsContent>
 
             <TabsContent value="game" className="space-y-6 mt-6">
@@ -1071,7 +1173,7 @@ export default function SettingsPage() {
             </TabsContent>
           </Tabs>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="flex justify-between">
           <Button onClick={handleSaveSettings} disabled={loading}>
             Save Settings
           </Button>
